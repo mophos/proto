@@ -5,4 +5,4 @@ build:
 	git push -u origin master
 	git tag v${VERSION}
 	git push origin master --tags
-	curl https://proxy.golang.org/github.com/mophos/proto-refer/@v/v${VERSION}
+	curl https://proxy.golang.org/github.com/mophos/proto-refer/@v${VERSION}
