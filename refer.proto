@@ -1,0 +1,36 @@
+syntax = "proto3";
+package proto;
+option go_package = ".;proto";
+
+// refer list
+message ReferListRequest {
+  string hospcode = 1;
+  string hn = 2;
+  string date = 3;
+}
+
+message ReferListResponse {
+  message Results {
+    string hospcode = 1;
+    string hospname = 2;
+    string title_name = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string birthdate = 6;
+    string sex = 7;
+    string cid = 8;
+    string hn = 9;
+    string contact_tel = 10;
+    string contact_name = 11;
+    string provider_name = 12;
+    string his_provider = 13;
+    string txid = 14;
+  }
+
+  repeated Results results = 2;
+
+}
+
+service ReferService {
+  rpc ReferList(ReferListRequest) returns (ReferListResponse) {}
+}
