@@ -25,7 +25,6 @@ const (
 // of the legacy proto package is being used.
 const _ = proto.ProtoPackageIsVersion4
 
-// refer list
 type ReferListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

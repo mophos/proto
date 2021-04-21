@@ -2,7 +2,6 @@ syntax = "proto3";
 package proto;
 option go_package = ".;proto";
 
-// refer list
 message ReferListRequest {
   string hospcode = 1;
   string hn = 2;
