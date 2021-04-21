@@ -5,7 +5,7 @@ publish:
 	git commit -m "update"
 	git push -u origin master
 	git tag v${VERSION}
-	git push origin master
+	git push origin master --tags
 
 	latest="$(git describe --tags $(git rev-list --tags --max-count=1))"
 	curl https://proxy.golang.org/github.com/mophos/proto-refer/@v/$latest.info
