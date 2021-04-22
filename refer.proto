@@ -1,29 +1,44 @@
 syntax = "proto3";
 package proto;
-option go_package = ".;proto";
+option go_package = "github.com/mophos/proto-refer;proto_refer";
 
-message ReferListRequest {
+message ReferOutRequest {
   string hospcode = 1;
-  string hn = 2;
-  string date = 3;
+  string date = 2;
 }
 
-message ReferListResponse {
+message ReferOutResponse {
   message Results {
     string hospcode = 1;
-    string hospname = 2;
-    string title_name = 3;
-    string first_name = 4;
-    string last_name = 5;
-    string birthdate = 6;
+    string cid = 2;
+    string hn = 3;
+    string fname = 4;
+    string lname = 5;
+    string birthday = 6;
     string sex = 7;
-    string cid = 8;
-    string hn = 9;
-    string contact_tel = 10;
-    string contact_name = 11;
-    string provider_name = 12;
-    string his_provider = 13;
-    string txid = 14;
+    string vn = 8;
+    string refer_date = 9;
+    string refer_time = 10;
+    string refer_number = 11;
+    string refer_point = 12;
+    string pttype = 13;
+    string pttype_name = 14;
+    string treatment = 15;
+    string diagcode = 16;
+    string diagname = 17;
+    string pre_diagnosis = 18;
+    string pmh = 19;
+    string hpi = 20;
+    string lab_text = 21;
+    string refer_hospcode = 22;
+    string refer_hospname = 23;
+    string expire_date = 24;
+    string refer_type_id = 25;
+    string refer_type_name = 26;
+    string refer_cause_id = 27;
+    string refer_cause_name = 28;
+    string rfrcs_id = 29;
+    string rfrcs_name = 30;
   }
 
   repeated Results results = 2;
@@ -31,5 +46,5 @@ message ReferListResponse {
 }
 
 service ReferService {
-  rpc ReferList(ReferListRequest) returns (ReferListResponse) {}
+  rpc ReferOut(ReferOutRequest) returns (ReferOutResponse) {}
 }
