@@ -81,4 +81,5 @@ message VisitResponse {
 
 service ReferService {
   rpc ReferOut(ReferOutRequest) returns (ReferOutResponse) {}
+  rpc Visit(VisitRequest) returns (VisitResponse) {}
 }

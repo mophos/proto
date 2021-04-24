@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReferServiceClient interface {
 	ReferOut(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferOutResponse, error)
+	Visit(ctx context.Context, in *VisitRequest, opts ...grpc.CallOption) (*VisitResponse, error)
 }
 
 type referServiceClient struct {
@@ -38,11 +39,21 @@ func (c *referServiceClient) ReferOut(ctx context.Context, in *ReferOutRequest, 
 	return out, nil
 }
 
+func (c *referServiceClient) Visit(ctx context.Context, in *VisitRequest, opts ...grpc.CallOption) (*VisitResponse, error) {
+	out := new(VisitResponse)
+	err := c.cc.Invoke(ctx, "/proto.ReferService/Visit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ReferServiceServer is the server API for ReferService service.
 // All implementations must embed UnimplementedReferServiceServer
 // for forward compatibility
 type ReferServiceServer interface {
 	ReferOut(context.Context, *ReferOutRequest) (*ReferOutResponse, error)
+	Visit(context.Context, *VisitRequest) (*VisitResponse, error)
 	mustEmbedUnimplementedReferServiceServer()
 }
 
@@ -52,6 +63,9 @@ type UnimplementedReferServiceServer struct {
 
 func (UnimplementedReferServiceServer) ReferOut(context.Context, *ReferOutRequest) (*ReferOutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReferOut not implemented")
+}
+func (UnimplementedReferServiceServer) Visit(context.Context, *VisitRequest) (*VisitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Visit not implemented")
 }
 func (UnimplementedReferServiceServer) mustEmbedUnimplementedReferServiceServer() {}
 
@@ -84,6 +98,24 @@ func _ReferService_ReferOut_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ReferService_Visit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VisitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReferServiceServer).Visit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ReferService/Visit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReferServiceServer).Visit(ctx, req.(*VisitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ReferService_ServiceDesc is the grpc.ServiceDesc for ReferService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -94,6 +126,10 @@ var ReferService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReferOut",
 			Handler:    _ReferService_ReferOut_Handler,
+		},
+		{
+			MethodName: "Visit",
+			Handler:    _ReferService_Visit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
