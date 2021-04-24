@@ -7,6 +7,11 @@ message ReferOutRequest {
   string date = 2;
 }
 
+message VisitRequest {
+  string hospcode = 1;
+  string date = 2;
+}
+
 message ReferOutResponse {
   message Results {
     string hospcode = 1;
@@ -29,7 +34,6 @@ message ReferOutResponse {
     string pre_diagnosis = 18;
     string pmh = 19;
     string hpi = 20;
-    string lab_text = 21;
     string refer_hospcode = 22;
     string refer_hospname = 23;
     string expire_date = 24;
@@ -39,6 +43,36 @@ message ReferOutResponse {
     string refer_cause_name = 28;
     string rfrcs_id = 29;
     string rfrcs_name = 30;
+  }
+
+  repeated Results results = 2;
+
+}
+
+message VisitResponse {
+  message Results {
+    string hospcode = 1;
+    string visit_date = 2;
+    string visit_time = 3;
+    string cid = 4;
+    string hn = 5;
+    string vn = 6;
+    string an = 7;
+    string fname = 8;
+    string lname = 9;
+    string birthday = 10;
+    string sex = 11;
+    string pttype = 12;
+    string pttype_no = 13;
+    string pttype_name = 14;
+    string hospmain_code = 15;
+    string hospmain_name = 16;
+    string hospsub_code = 17;
+    string hospsub_name = 18;
+    string main_department = 19;
+    string sub_department = 20;
+    string diagcode = 21;
+    string diagname = 22;
   }
 
   repeated Results results = 2;
