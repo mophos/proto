@@ -1,4 +1,4 @@
-module github.com/mophos/proto/v2
+module github.com/mophos/proto
 
 go 1.16
 
