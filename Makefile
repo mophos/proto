@@ -1,6 +1,6 @@
-VERSION=2.0.0
+VERSION=2.0.1
 publish:
-	protoc --go_out=./v2 --go-grpc_out=./v2 ./src/*.proto
+	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto
 	git add .
 	git commit -m "update version ${VERSION}"
 	git push
