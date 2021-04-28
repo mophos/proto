@@ -1,6 +1,6 @@
 syntax = "proto3";
-package proto;
-option go_package = "./h4u";
+package v2;
+option go_package = "./h4u;v2";
 
 message Request {
     string cid = 1;

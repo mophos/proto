@@ -1,6 +1,6 @@
 syntax = "proto3";
-package proto;
-option go_package = "./emr";
+package v2;
+option go_package = "./emr;v2";
 
 message EmrSearchRequest {
   string cid = 1;
