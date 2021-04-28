@@ -1,4 +1,4 @@
-VERSION=2.0.1
+VERSION=2.0.2
 publish:
 	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto
 	git add .
@@ -8,4 +8,4 @@ publish:
 	git push origin master --tags
 	curl https://proxy.golang.org/github.com/mophos/proto/@v/v${VERSION}.info
 build:
-	protoc --go_out=./v2 --go-grpc_out=./v2 ./src/*.proto
+	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto

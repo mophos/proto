@@ -1,6 +1,6 @@
 syntax = "proto3";
-package v2;
-option go_package = "./refer;v2";
+package proto;
+option go_package = "./refer;proto";
 
 message ReferOutRequest {
   string hospcode = 1;
