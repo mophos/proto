@@ -19,14 +19,14 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmrServiceClient interface {
 	Search(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrSearchResponse, error)
-	Service(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error)
+	Service(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error)
 	OPDScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDScreenResponse, error)
 	OPDDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDiagResponse, error)
 	OPDProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDProcedureResponse, error)
 	OPDDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDrugResponse, error)
 	OPDLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDLabResponse, error)
-	Appointment(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error)
-	ReferOut(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error)
+	Appointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error)
+	ReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error)
 }
 
 type emrServiceClient struct {
@@ -46,7 +46,7 @@ func (c *emrServiceClient) Search(ctx context.Context, in *EmrSearchRequest, opt
 	return out, nil
 }
 
-func (c *emrServiceClient) Service(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error) {
+func (c *emrServiceClient) Service(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error) {
 	out := new(EmrServiceListResponse)
 	err := c.cc.Invoke(ctx, "/proto.EmrService/Service", in, out, opts...)
 	if err != nil {
@@ -100,7 +100,7 @@ func (c *emrServiceClient) OPDLab(ctx context.Context, in *EmrServiceRequest, op
 	return out, nil
 }
 
-func (c *emrServiceClient) Appointment(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error) {
+func (c *emrServiceClient) Appointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error) {
 	out := new(EmrAppointmentResponse)
 	err := c.cc.Invoke(ctx, "/proto.EmrService/Appointment", in, out, opts...)
 	if err != nil {
@@ -109,7 +109,7 @@ func (c *emrServiceClient) Appointment(ctx context.Context, in *EmrRequest, opts
 	return out, nil
 }
 
-func (c *emrServiceClient) ReferOut(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error) {
+func (c *emrServiceClient) ReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error) {
 	out := new(EmrReferOutResponse)
 	err := c.cc.Invoke(ctx, "/proto.EmrService/ReferOut", in, out, opts...)
 	if err != nil {
@@ -123,14 +123,14 @@ func (c *emrServiceClient) ReferOut(ctx context.Context, in *EmrRequest, opts ..
 // for forward compatibility
 type EmrServiceServer interface {
 	Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error)
-	Service(context.Context, *EmrServiceRequest) (*EmrServiceListResponse, error)
+	Service(context.Context, *EmrRequest) (*EmrServiceListResponse, error)
 	OPDScreening(context.Context, *EmrServiceRequest) (*EmrOPDScreenResponse, error)
 	OPDDiagnosis(context.Context, *EmrServiceRequest) (*EmrOPDDiagResponse, error)
 	OPDProcedure(context.Context, *EmrServiceRequest) (*EmrOPDProcedureResponse, error)
 	OPDDrug(context.Context, *EmrServiceRequest) (*EmrOPDDrugResponse, error)
 	OPDLab(context.Context, *EmrServiceRequest) (*EmrOPDLabResponse, error)
-	Appointment(context.Context, *EmrRequest) (*EmrAppointmentResponse, error)
-	ReferOut(context.Context, *EmrRequest) (*EmrReferOutResponse, error)
+	Appointment(context.Context, *EmrSearchRequest) (*EmrAppointmentResponse, error)
+	ReferOut(context.Context, *EmrSearchRequest) (*EmrReferOutResponse, error)
 	mustEmbedUnimplementedEmrServiceServer()
 }
 
@@ -141,7 +141,7 @@ type UnimplementedEmrServiceServer struct {
 func (UnimplementedEmrServiceServer) Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (UnimplementedEmrServiceServer) Service(context.Context, *EmrServiceRequest) (*EmrServiceListResponse, error) {
+func (UnimplementedEmrServiceServer) Service(context.Context, *EmrRequest) (*EmrServiceListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Service not implemented")
 }
 func (UnimplementedEmrServiceServer) OPDScreening(context.Context, *EmrServiceRequest) (*EmrOPDScreenResponse, error) {
@@ -159,10 +159,10 @@ func (UnimplementedEmrServiceServer) OPDDrug(context.Context, *EmrServiceRequest
 func (UnimplementedEmrServiceServer) OPDLab(context.Context, *EmrServiceRequest) (*EmrOPDLabResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OPDLab not implemented")
 }
-func (UnimplementedEmrServiceServer) Appointment(context.Context, *EmrRequest) (*EmrAppointmentResponse, error) {
+func (UnimplementedEmrServiceServer) Appointment(context.Context, *EmrSearchRequest) (*EmrAppointmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Appointment not implemented")
 }
-func (UnimplementedEmrServiceServer) ReferOut(context.Context, *EmrRequest) (*EmrReferOutResponse, error) {
+func (UnimplementedEmrServiceServer) ReferOut(context.Context, *EmrSearchRequest) (*EmrReferOutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReferOut not implemented")
 }
 func (UnimplementedEmrServiceServer) mustEmbedUnimplementedEmrServiceServer() {}
@@ -197,7 +197,7 @@ func _EmrService_Search_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _EmrService_Service_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmrServiceRequest)
+	in := new(EmrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -209,7 +209,7 @@ func _EmrService_Service_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/proto.EmrService/Service",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).Service(ctx, req.(*EmrServiceRequest))
+		return srv.(EmrServiceServer).Service(ctx, req.(*EmrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -305,7 +305,7 @@ func _EmrService_OPDLab_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _EmrService_Appointment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmrRequest)
+	in := new(EmrSearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -317,13 +317,13 @@ func _EmrService_Appointment_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/proto.EmrService/Appointment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).Appointment(ctx, req.(*EmrRequest))
+		return srv.(EmrServiceServer).Appointment(ctx, req.(*EmrSearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _EmrService_ReferOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmrRequest)
+	in := new(EmrSearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -335,7 +335,7 @@ func _EmrService_ReferOut_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/proto.EmrService/ReferOut",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).ReferOut(ctx, req.(*EmrRequest))
+		return srv.(EmrServiceServer).ReferOut(ctx, req.(*EmrSearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
