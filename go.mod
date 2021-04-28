@@ -1,4 +1,4 @@
-module github.com/mophos/proto-refer
+module github.com/mophos/proto
 
 go 1.16
 

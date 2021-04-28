@@ -1,13 +1,12 @@
 syntax = "proto3";
 package proto;
-option go_package = "github.com/mophos/proto-refer;proto_refer";
+option go_package = "github.com/mophos/proto;proto";
 
 message ReferOutRequest {
   string hospcode = 1;
   string date = 2;
 }
-
-message VisitRequest {
+message ReferVisitRequest {
   string hospcode = 1;
   string date = 2;
 }
@@ -49,7 +48,7 @@ message ReferOutResponse {
 
 }
 
-message VisitResponse {
+message ReferVisitResponse {
   message Results {
     string hospcode = 1;
     string visit_date = 2;
@@ -81,5 +80,5 @@ message VisitResponse {
 
 service ReferService {
   rpc ReferOut(ReferOutRequest) returns (ReferOutResponse) {}
-  rpc Visit(VisitRequest) returns (VisitResponse) {}
+  rpc Visit(ReferOutRequest) returns (ReferVisitResponse) {}
 }

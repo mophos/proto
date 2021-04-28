@@ -1,5 +1,18 @@
-Build & Publish
+# Build & Publish
+
+Edit version in `Makefile`
+
+```
+VERSION=1.0.x
+```
+
+### Build
 
 ```shell
-make VERSION=x.y.z build
+make build
+```
+
+### Publish
+```shell
+make publish
 ```
