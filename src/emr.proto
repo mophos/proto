@@ -221,13 +221,13 @@ message EmrReferOutResponse {
 
 service EmrService {
   rpc Search(EmrSearchRequest) returns (EmrSearchResponse) {}
-  rpc Service(EmrServiceRequest) returns (EmrServiceListResponse) {}
+  rpc Service(EmrRequest) returns (EmrServiceListResponse) {}
   rpc OPDScreening(EmrServiceRequest) returns (EmrOPDScreenResponse) {}
   rpc OPDDiagnosis(EmrServiceRequest) returns (EmrOPDDiagResponse) {}
   rpc OPDProcedure(EmrServiceRequest) returns (EmrOPDProcedureResponse) {}
   rpc OPDDrug(EmrServiceRequest) returns (EmrOPDDrugResponse) {}
   rpc OPDLab(EmrServiceRequest) returns (EmrOPDLabResponse) {}
-  rpc Appointment(EmrRequest) returns (EmrAppointmentResponse) {}
-  rpc ReferOut(EmrRequest) returns (EmrReferOutResponse) {}
+  rpc Appointment(EmrSearchRequest) returns (EmrAppointmentResponse) {}
+  rpc ReferOut(EmrSearchRequest) returns (EmrReferOutResponse) {}
 }
  
