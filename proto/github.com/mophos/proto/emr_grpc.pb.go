@@ -24,7 +24,7 @@ type EmrServiceClient interface {
 	OPDDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDiagResponse, error)
 	OPDProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDProcedureResponse, error)
 	OPDDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDrugResponse, error)
-	Lab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrLabResponse, error)
+	OPDLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDLabResponse, error)
 	Appointment(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error)
 	ReferOut(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error)
 }
@@ -91,9 +91,9 @@ func (c *emrServiceClient) OPDDrug(ctx context.Context, in *EmrServiceRequest, o
 	return out, nil
 }
 
-func (c *emrServiceClient) Lab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrLabResponse, error) {
-	out := new(EmrLabResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/Lab", in, out, opts...)
+func (c *emrServiceClient) OPDLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDLabResponse, error) {
+	out := new(EmrOPDLabResponse)
+	err := c.cc.Invoke(ctx, "/proto.EmrService/OPDLab", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ type EmrServiceServer interface {
 	OPDDiagnosis(context.Context, *EmrServiceRequest) (*EmrOPDDiagResponse, error)
 	OPDProcedure(context.Context, *EmrServiceRequest) (*EmrOPDProcedureResponse, error)
 	OPDDrug(context.Context, *EmrServiceRequest) (*EmrOPDDrugResponse, error)
-	Lab(context.Context, *EmrServiceRequest) (*EmrLabResponse, error)
+	OPDLab(context.Context, *EmrServiceRequest) (*EmrOPDLabResponse, error)
 	Appointment(context.Context, *EmrRequest) (*EmrAppointmentResponse, error)
 	ReferOut(context.Context, *EmrRequest) (*EmrReferOutResponse, error)
 	mustEmbedUnimplementedEmrServiceServer()
@@ -156,8 +156,8 @@ func (UnimplementedEmrServiceServer) OPDProcedure(context.Context, *EmrServiceRe
 func (UnimplementedEmrServiceServer) OPDDrug(context.Context, *EmrServiceRequest) (*EmrOPDDrugResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OPDDrug not implemented")
 }
-func (UnimplementedEmrServiceServer) Lab(context.Context, *EmrServiceRequest) (*EmrLabResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Lab not implemented")
+func (UnimplementedEmrServiceServer) OPDLab(context.Context, *EmrServiceRequest) (*EmrOPDLabResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OPDLab not implemented")
 }
 func (UnimplementedEmrServiceServer) Appointment(context.Context, *EmrRequest) (*EmrAppointmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Appointment not implemented")
@@ -286,20 +286,20 @@ func _EmrService_OPDDrug_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_Lab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _EmrService_OPDLab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).Lab(ctx, in)
+		return srv.(EmrServiceServer).OPDLab(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/Lab",
+		FullMethod: "/proto.EmrService/OPDLab",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).Lab(ctx, req.(*EmrServiceRequest))
+		return srv.(EmrServiceServer).OPDLab(ctx, req.(*EmrServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -372,8 +372,8 @@ var EmrService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _EmrService_OPDDrug_Handler,
 		},
 		{
-			MethodName: "Lab",
-			Handler:    _EmrService_Lab_Handler,
+			MethodName: "OPDLab",
+			Handler:    _EmrService_OPDLab_Handler,
 		},
 		{
 			MethodName: "Appointment",
