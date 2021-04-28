@@ -8,4 +8,4 @@ publish:
 	git push origin master --tags
 	curl https://proxy.golang.org/github.com/mophos/proto/@v/v${VERSION}.info
 build:
-	protoc --go_out=./proto --go-grpc_out=./proto *.proto
+	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto

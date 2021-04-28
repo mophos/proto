@@ -1,0 +1,220 @@
+syntax = "proto3";
+package proto;
+option go_package = "github.com/mophos/proto;proto";
+
+message Request {
+    string cid = 1;
+}
+
+message DateserveRequest {
+    string dateserve = 1;
+    string hospcode = 2;
+}
+
+message HospcodeRequest {
+    string hospcode = 1;
+}
+
+message TokenRequest {
+    string token = 1;
+}
+
+message ProviderRequest {
+    string hospcode = 1;
+    string table_name = 2;
+}
+
+message ListDoctorResponse {
+    message Doctor {
+        string txid = 1;
+        string hospcode = 2;
+        string name = 3;
+        string license_no = 4;
+        string cid= 5 ;
+        string code = 6;
+    }
+    repeated Doctor Results = 2;
+}
+
+message HisProviderResponse {
+    message HisProvider {
+        string provider_name = 1;
+        string hospcode = 2;
+    }
+    repeated HisProvider Results = 2;
+}
+
+message ListClinicResponse {
+    message Clinic {
+        string txid = 1;
+        string hospcode = 2;
+        string clinic_code = 3;
+        string clinic_name = 4;
+    }
+    repeated Clinic Results = 2;
+}
+
+message TokenResponse {
+    message Results {
+      string app_id = 1;
+      string is_actived = 2;
+      string expired_date = 3;
+    }
+    repeated Results results = 2;
+}
+  
+message CountResponse {
+    message Results {
+      string count = 1;
+      string hospcode = 2;
+      string table =3;
+    }
+    repeated Results results = 2;
+}
+  
+message H4UPersonalResponse {
+    message Results {
+        string cid = 1;
+        string hn = 2;
+        string pname =3;
+        string fname =4;
+        string lname =5;
+        string birthday =6;
+        string addressid =7;
+        string addrpart =8;
+        string moopart =9;
+        string tmbpart =10;
+        string amppart =11;
+        string chwpart =12;
+        string full_name =13;
+        string drugallergy =14;
+        string age_y =15;
+        string bloodgrp =16;
+        string hometel =17;
+        string nationality =18;
+        string road =19;
+        string po_code =20;
+        string addr_soi =21;
+        string provider_name = 22;
+        string his_provider = 23;
+    }
+    repeated Results results = 2;
+}
+  
+message H4UVisitResponse {
+    message Results {
+        string vstdate = 1;
+        string vsttime = 2;
+        string bmi =3;
+        string bw =4;
+        string o2sat =5;
+        string temperature =6;
+        string rr =7;
+        string cc =8;
+        string pe =9;
+        string height =10;
+        string bps =11;
+        string bpd =12;
+        string hpi =13;
+        string pulse =14;
+        string provider_name = 15;
+        string his_provider = 16;
+    }
+    repeated Results results = 2;
+}
+  
+message H4ULabResponse {
+    message Results {
+        string lab = 1;
+        string name = 2;
+        string order_date =3;
+        string order_time =4;
+        string lab_order_number =5;
+        string vn =6;
+        string hn =7;
+        string lab_items_name_ref =8;
+        string lab_items_code =9;
+        string lab_order_result =10;
+        string lab_items_normal_value_ref =11;
+        string lab_items_name =12;
+        string comfirm_report =13;
+        string provider_name = 14;
+        string his_provider = 15;
+    }
+    repeated Results results = 2;
+}
+
+message H4UOrderResponse {
+    message Results {
+        string drug = 1;
+        string vstdate = 2;
+        string vsttime =3;
+        string provider_name = 4;
+        string his_provider = 5;
+    }
+    repeated Results results = 2;
+}
+  
+message H4UDiagnosisResponse {
+    message Results {
+        string diag = 1;
+        string vstdate = 2;
+        string vsttime =3;
+        string provider_name = 4;
+        string his_provider = 5;
+    }
+    repeated Results results = 2;
+}
+
+message AppointmentDateserveResponse {
+    message Results {
+        string hospname = 1;
+        string hospcode = 2;
+        string visit_date = 3;
+        string hn = 4;
+        string vn = 5;
+        string appointment_date = 6;
+        string appointment_time = 7;
+        string cause = 8;
+        string contact_point = 9;
+        string note = 10;
+        string title_name = 11;
+        string first_name = 12;
+        string last_name = 13;
+        string cid = 14;
+        string doctor = 15;
+        string clinic_code = 16;
+        string clinic_name = 17;
+        string department_code = 18;
+        string department_name = 19;
+        string telephone = 20;
+        string provider_name = 21;
+        string his_provider = 22;
+        string txid = 23;
+    }
+    repeated Results results = 2;
+}
+
+service MhealthService {
+    rpc AppointmentDateserve(DateserveRequest) returns (AppointmentDateserveResponse) {}
+}
+
+service MasterService {
+    rpc DoctorList(HospcodeRequest) returns (ListDoctorResponse) {}
+    rpc ClinicList(HospcodeRequest) returns (ListClinicResponse) {}
+    rpc HisProviderList(HospcodeRequest) returns (HisProviderResponse) {}
+    rpc CountRecord(ProviderRequest) returns (CountResponse) {}
+}
+  
+service AuthenService{
+    rpc Authen(TokenRequest) returns (TokenResponse) {}
+}
+
+service H4UService{
+    rpc H4UPersonal(Request) returns (H4UPersonalResponse);
+    rpc H4UVisit(Request) returns (H4UVisitResponse);
+    rpc H4ULab(Request) returns (H4ULabResponse);
+    rpc H4UOrder(Request) returns (H4UOrderResponse);
+    rpc H4UDiagnosis(Request) returns (H4UDiagnosisResponse);
+}
+
