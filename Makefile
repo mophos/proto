@@ -1,4 +1,4 @@
-VERSION=2.0.1
+VERSION=1.2.1
 publish:
 	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto
 	git add .
