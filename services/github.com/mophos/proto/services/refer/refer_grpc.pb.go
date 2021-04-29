@@ -32,7 +32,7 @@ func NewReferServiceClient(cc grpc.ClientConnInterface) ReferServiceClient {
 
 func (c *referServiceClient) ReferOut(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferOutResponse, error) {
 	out := new(ReferOutResponse)
-	err := c.cc.Invoke(ctx, "/proto.ReferService/ReferOut", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.ReferService/ReferOut", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (c *referServiceClient) ReferOut(ctx context.Context, in *ReferOutRequest, 
 
 func (c *referServiceClient) Service(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferVisitResponse, error) {
 	out := new(ReferVisitResponse)
-	err := c.cc.Invoke(ctx, "/proto.ReferService/Service", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.ReferService/Service", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ func _ReferService_ReferOut_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.ReferService/ReferOut",
+		FullMethod: "/services.ReferService/ReferOut",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ReferServiceServer).ReferOut(ctx, req.(*ReferOutRequest))
@@ -108,7 +108,7 @@ func _ReferService_Service_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.ReferService/Service",
+		FullMethod: "/services.ReferService/Service",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ReferServiceServer).Service(ctx, req.(*ReferOutRequest))
@@ -120,7 +120,7 @@ func _ReferService_Service_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ReferService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.ReferService",
+	ServiceName: "services.ReferService",
 	HandlerType: (*ReferServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

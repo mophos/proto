@@ -39,7 +39,7 @@ func NewEmrServiceClient(cc grpc.ClientConnInterface) EmrServiceClient {
 
 func (c *emrServiceClient) Search(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrSearchResponse, error) {
 	out := new(EmrSearchResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/Search", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +48,7 @@ func (c *emrServiceClient) Search(ctx context.Context, in *EmrSearchRequest, opt
 
 func (c *emrServiceClient) GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error) {
 	out := new(EmrServiceListResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetService", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetService", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (c *emrServiceClient) GetService(ctx context.Context, in *EmrRequest, opts 
 
 func (c *emrServiceClient) GetOpdScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDScreenResponse, error) {
 	out := new(EmrOPDScreenResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetOpdScreening", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetOpdScreening", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (c *emrServiceClient) GetOpdScreening(ctx context.Context, in *EmrServiceRe
 
 func (c *emrServiceClient) GetOpdDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDiagResponse, error) {
 	out := new(EmrOPDDiagResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetOpdDiagnosis", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetOpdDiagnosis", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ func (c *emrServiceClient) GetOpdDiagnosis(ctx context.Context, in *EmrServiceRe
 
 func (c *emrServiceClient) GetOpdProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDProcedureResponse, error) {
 	out := new(EmrOPDProcedureResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetOpdProcedure", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetOpdProcedure", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (c *emrServiceClient) GetOpdProcedure(ctx context.Context, in *EmrServiceRe
 
 func (c *emrServiceClient) GetOpdDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDrugResponse, error) {
 	out := new(EmrOPDDrugResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetOpdDrug", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetOpdDrug", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ func (c *emrServiceClient) GetOpdDrug(ctx context.Context, in *EmrServiceRequest
 
 func (c *emrServiceClient) GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDLabResponse, error) {
 	out := new(EmrOPDLabResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetOpdLab", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetOpdLab", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +102,7 @@ func (c *emrServiceClient) GetOpdLab(ctx context.Context, in *EmrServiceRequest,
 
 func (c *emrServiceClient) GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error) {
 	out := new(EmrAppointmentResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetAppointment", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetAppointment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func (c *emrServiceClient) GetAppointment(ctx context.Context, in *EmrSearchRequ
 
 func (c *emrServiceClient) GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error) {
 	out := new(EmrReferOutResponse)
-	err := c.cc.Invoke(ctx, "/proto.EmrService/GetReferOut", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/services.EmrService/GetReferOut", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -188,7 +188,7 @@ func _EmrService_Search_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/Search",
+		FullMethod: "/services.EmrService/Search",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).Search(ctx, req.(*EmrSearchRequest))
@@ -206,7 +206,7 @@ func _EmrService_GetService_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetService",
+		FullMethod: "/services.EmrService/GetService",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetService(ctx, req.(*EmrRequest))
@@ -224,7 +224,7 @@ func _EmrService_GetOpdScreening_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetOpdScreening",
+		FullMethod: "/services.EmrService/GetOpdScreening",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetOpdScreening(ctx, req.(*EmrServiceRequest))
@@ -242,7 +242,7 @@ func _EmrService_GetOpdDiagnosis_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetOpdDiagnosis",
+		FullMethod: "/services.EmrService/GetOpdDiagnosis",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetOpdDiagnosis(ctx, req.(*EmrServiceRequest))
@@ -260,7 +260,7 @@ func _EmrService_GetOpdProcedure_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetOpdProcedure",
+		FullMethod: "/services.EmrService/GetOpdProcedure",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetOpdProcedure(ctx, req.(*EmrServiceRequest))
@@ -278,7 +278,7 @@ func _EmrService_GetOpdDrug_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetOpdDrug",
+		FullMethod: "/services.EmrService/GetOpdDrug",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetOpdDrug(ctx, req.(*EmrServiceRequest))
@@ -296,7 +296,7 @@ func _EmrService_GetOpdLab_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetOpdLab",
+		FullMethod: "/services.EmrService/GetOpdLab",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetOpdLab(ctx, req.(*EmrServiceRequest))
@@ -314,7 +314,7 @@ func _EmrService_GetAppointment_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetAppointment",
+		FullMethod: "/services.EmrService/GetAppointment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetAppointment(ctx, req.(*EmrSearchRequest))
@@ -332,7 +332,7 @@ func _EmrService_GetReferOut_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.EmrService/GetReferOut",
+		FullMethod: "/services.EmrService/GetReferOut",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EmrServiceServer).GetReferOut(ctx, req.(*EmrSearchRequest))
@@ -344,7 +344,7 @@ func _EmrService_GetReferOut_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var EmrService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "proto.EmrService",
+	ServiceName: "services.EmrService",
 	HandlerType: (*EmrServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -1,6 +1,6 @@
 syntax = "proto3";
-package proto;
-option go_package = "github.com/mophos/proto/h4u";
+package services;
+option go_package = "github.com/mophos/proto/services/h4u";
 
 service MhealthService {
     rpc AppointmentDateserve(DateserveRequest) returns (AppointmentDateserveResponse) {}

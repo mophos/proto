@@ -1,7 +1,7 @@
-VERSION=1.3.3
+VERSION=1.3.4
 publish:
-	rm -rf proto/*
-	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto
+	rm -rf services/*
+	protoc --go_out=./services --go-grpc_out=./services ./src/*.proto
 	git add .
 	git commit -m "update version ${VERSION}"
 	git push
@@ -9,5 +9,5 @@ publish:
 	git push origin master --tags
 	curl https://proxy.golang.org/github.com/mophos/proto/@v/v${VERSION}.info
 build:
-	rm -rf proto/*
-	protoc --go_out=./proto --go-grpc_out=./proto ./src/*.proto
+	rm -rf services/*
+	protoc --go_out=./services --go-grpc_out=./services ./src/*.proto
