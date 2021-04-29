@@ -14,6 +14,7 @@ service EmrService {
   rpc GetOpdLab(EmrServiceRequest) returns (EmrGetOpdLabResponse) {}
   rpc GetAppointment(EmrSearchRequest) returns (EmrGetAppointmentResponse) {}
   rpc GetReferOut(EmrSearchRequest) returns (EmrGetReferOutResponse) {}
+  rpc GetInfo(EmrRequest) returns (EmrInfoResponse) {}
 }
 
 message EmrRequest {
@@ -224,6 +225,35 @@ message EmrGetReferOutResponse {
     string refer_type = 18;
     string refer_cause = 19;
     string expire_date = 20;
+    string provider_name = 21;
+    string his_provider = 22;
+    string txid = 23;
+    
+  }
+  repeated Results results = 2;
+}
+
+message EmrInfoResponse {
+  message Results {
+    string hospcode = 2;
+    string hn = 3;
+    string cid = 4;
+    string title_name = 5;
+    string first_name = 6;
+    string last_name = 7;
+    string birthdate = 8;
+    string sex = 9;
+    string blood_group = 10;
+    string pttype = 11;
+    string pttype_name = 12;
+    string pttype_begin_date = 13;
+    string pttype_expire_date = 14;
+    string pttype_no = 15;
+    string pttype_hospmain = 16;
+    string pttype_hospmain_name = 17;
+    string pttype_hospsub = 18;
+    string pttype_hospsub_name = 19;
+    string contact_name = 20;
     string provider_name = 21;
     string his_provider = 22;
     string txid = 23;
