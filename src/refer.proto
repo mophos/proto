@@ -2,10 +2,16 @@ syntax = "proto3";
 package proto;
 option go_package = "./refer;proto";
 
+service ReferService {
+  rpc ReferOut(ReferOutRequest) returns (ReferOutResponse) {}
+  rpc Service(ReferOutRequest) returns (ReferVisitResponse) {}
+}
+
 message ReferOutRequest {
   string hospcode = 1;
   string date = 2;
 }
+
 message ReferVisitRequest {
   string hospcode = 1;
   string date = 2;
@@ -78,7 +84,3 @@ message ReferVisitResponse {
 
 }
 
-service ReferService {
-  rpc ReferOut(ReferOutRequest) returns (ReferOutResponse) {}
-  rpc Visit(ReferOutRequest) returns (ReferVisitResponse) {}
-}

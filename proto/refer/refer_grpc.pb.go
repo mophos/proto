@@ -19,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReferServiceClient interface {
 	ReferOut(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferOutResponse, error)
-	Visit(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferVisitResponse, error)
+	Service(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferVisitResponse, error)
 }
 
 type referServiceClient struct {
@@ -39,9 +39,9 @@ func (c *referServiceClient) ReferOut(ctx context.Context, in *ReferOutRequest, 
 	return out, nil
 }
 
-func (c *referServiceClient) Visit(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferVisitResponse, error) {
+func (c *referServiceClient) Service(ctx context.Context, in *ReferOutRequest, opts ...grpc.CallOption) (*ReferVisitResponse, error) {
 	out := new(ReferVisitResponse)
-	err := c.cc.Invoke(ctx, "/proto.ReferService/Visit", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.ReferService/Service", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (c *referServiceClient) Visit(ctx context.Context, in *ReferOutRequest, opt
 // for forward compatibility
 type ReferServiceServer interface {
 	ReferOut(context.Context, *ReferOutRequest) (*ReferOutResponse, error)
-	Visit(context.Context, *ReferOutRequest) (*ReferVisitResponse, error)
+	Service(context.Context, *ReferOutRequest) (*ReferVisitResponse, error)
 	mustEmbedUnimplementedReferServiceServer()
 }
 
@@ -64,8 +64,8 @@ type UnimplementedReferServiceServer struct {
 func (UnimplementedReferServiceServer) ReferOut(context.Context, *ReferOutRequest) (*ReferOutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReferOut not implemented")
 }
-func (UnimplementedReferServiceServer) Visit(context.Context, *ReferOutRequest) (*ReferVisitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Visit not implemented")
+func (UnimplementedReferServiceServer) Service(context.Context, *ReferOutRequest) (*ReferVisitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Service not implemented")
 }
 func (UnimplementedReferServiceServer) mustEmbedUnimplementedReferServiceServer() {}
 
@@ -98,20 +98,20 @@ func _ReferService_ReferOut_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReferService_Visit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReferService_Service_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReferOutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReferServiceServer).Visit(ctx, in)
+		return srv.(ReferServiceServer).Service(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.ReferService/Visit",
+		FullMethod: "/proto.ReferService/Service",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReferServiceServer).Visit(ctx, req.(*ReferOutRequest))
+		return srv.(ReferServiceServer).Service(ctx, req.(*ReferOutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -128,8 +128,8 @@ var ReferService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ReferService_ReferOut_Handler,
 		},
 		{
-			MethodName: "Visit",
-			Handler:    _ReferService_Visit_Handler,
+			MethodName: "Service",
+			Handler:    _ReferService_Service_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

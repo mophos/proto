@@ -2,6 +2,29 @@ syntax = "proto3";
 package proto;
 option go_package = "./h4u;proto";
 
+service MhealthService {
+    rpc AppointmentDateserve(DateserveRequest) returns (AppointmentDateserveResponse) {}
+}
+
+service MasterService {
+    rpc DoctorList(HospcodeRequest) returns (ListDoctorResponse) {}
+    rpc ClinicList(HospcodeRequest) returns (ListClinicResponse) {}
+    rpc HisProviderList(HospcodeRequest) returns (HisProviderResponse) {}
+    rpc CountRecord(ProviderRequest) returns (CountResponse) {}
+}
+  
+service AuthenService{
+    rpc Authen(TokenRequest) returns (TokenResponse) {}
+}
+
+service H4UService{
+    rpc H4UPersonal(Request) returns (H4UPersonalResponse);
+    rpc H4UVisit(Request) returns (H4UVisitResponse);
+    rpc H4ULab(Request) returns (H4ULabResponse);
+    rpc H4UOrder(Request) returns (H4UOrderResponse);
+    rpc H4UDiagnosis(Request) returns (H4UDiagnosisResponse);
+}
+
 message Request {
     string cid = 1;
 }
@@ -194,27 +217,3 @@ message AppointmentDateserveResponse {
     }
     repeated Results results = 2;
 }
-
-service MhealthService {
-    rpc AppointmentDateserve(DateserveRequest) returns (AppointmentDateserveResponse) {}
-}
-
-service MasterService {
-    rpc DoctorList(HospcodeRequest) returns (ListDoctorResponse) {}
-    rpc ClinicList(HospcodeRequest) returns (ListClinicResponse) {}
-    rpc HisProviderList(HospcodeRequest) returns (HisProviderResponse) {}
-    rpc CountRecord(ProviderRequest) returns (CountResponse) {}
-}
-  
-service AuthenService{
-    rpc Authen(TokenRequest) returns (TokenResponse) {}
-}
-
-service H4UService{
-    rpc H4UPersonal(Request) returns (H4UPersonalResponse);
-    rpc H4UVisit(Request) returns (H4UVisitResponse);
-    rpc H4ULab(Request) returns (H4ULabResponse);
-    rpc H4UOrder(Request) returns (H4UOrderResponse);
-    rpc H4UDiagnosis(Request) returns (H4UDiagnosisResponse);
-}
-
