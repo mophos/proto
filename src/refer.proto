@@ -65,21 +65,22 @@ message ReferVisitResponse {
     string hn = 5;
     string vn = 6;
     string an = 7;
-    string fname = 8;
-    string lname = 9;
-    string birthday = 10;
-    string sex = 11;
-    string pttype = 12;
-    string pttype_no = 13;
-    string pttype_name = 14;
-    string hospmain_code = 15;
-    string hospmain_name = 16;
-    string hospsub_code = 17;
-    string hospsub_name = 18;
-    string main_department = 19;
-    string sub_department = 20;
-    string diagcode = 21;
-    string diagname = 22;
+    string title_name = 8;
+    string first_name = 9;
+    string last_name = 10;
+    string birthday = 11;
+    string sex = 12;
+    string pttype = 13;
+    string pttype_no = 14;
+    string pttype_name = 15;
+    string hospmain_code = 16;
+    string hospmain_name = 17;
+    string hospsub_code = 18;
+    string hospsub_name = 19;
+    string main_department = 20;
+    string sub_department = 21;
+    string diagcode = 22;
+    string diagname = 23;
   }
 
   repeated Results results = 2;
