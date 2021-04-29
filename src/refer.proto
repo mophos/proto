@@ -1,6 +1,6 @@
 syntax = "proto3";
-package services;
-option go_package = "github.com/mophos/proto/services/refer";
+package grpc;
+option go_package = "./refer;grpc";
 
 service ReferService {
   rpc ReferOut(ReferOutRequest) returns (ReferOutResponse) {}
