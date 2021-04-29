@@ -1,6 +1,6 @@
 syntax = "proto3";
 package proto;
-option go_package = "./emr;proto";
+option go_package = "github.com/mophos/proto/emr";
 
 service EmrService {
   rpc Search(EmrSearchRequest) returns (EmrSearchResponse) {}
