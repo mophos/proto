@@ -103,10 +103,9 @@ message EmrGetOpdDiagResponse {
     string diagnosis_en_name = 6;
     string diagnosis_th_name = 7;
     string diagnosis_type = 8;
-    string diagnosis_text = 9;
-    string provider_name = 10;
-    string his_provider = 11;
-    string txid = 12;
+    string provider_name = 9;
+    string his_provider = 10;
+    string txid = 11;
   }
 
   repeated Results results = 2;
