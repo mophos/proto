@@ -2,7 +2,7 @@ syntax = "proto3";
 package grpc;
 option go_package = "./emr;grpc";
 
-service Service {
+service EmrService {
   rpc Search(EmrSearchRequest) returns (EmrSearchResponse) {}
   rpc GetService(EmrRequest) returns (EmrGetServiceResponse) {}
   rpc GetOpdScreening(EmrServiceRequest) returns (EmrGetOpdScreenResponse) {}
