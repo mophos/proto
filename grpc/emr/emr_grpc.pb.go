@@ -14,374 +14,374 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// EmrServiceClient is the client API for EmrService service.
+// ServiceClient is the client API for Service service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type EmrServiceClient interface {
+type ServiceClient interface {
 	Search(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrSearchResponse, error)
-	GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error)
-	GetOpdScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDScreenResponse, error)
-	GetOpdDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDiagResponse, error)
-	GetOpdProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDProcedureResponse, error)
-	GetOpdDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDrugResponse, error)
-	GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDLabResponse, error)
-	GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error)
-	GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error)
+	GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrGetServiceResponse, error)
+	GetOpdScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdScreenResponse, error)
+	GetOpdDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdDiagResponse, error)
+	GetOpdProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdProcedureResponse, error)
+	GetOpdDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdDrugResponse, error)
+	GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdLabResponse, error)
+	GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAppointmentResponse, error)
+	GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetReferOutResponse, error)
 }
 
-type emrServiceClient struct {
+type serviceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewEmrServiceClient(cc grpc.ClientConnInterface) EmrServiceClient {
-	return &emrServiceClient{cc}
+func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
+	return &serviceClient{cc}
 }
 
-func (c *emrServiceClient) Search(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrSearchResponse, error) {
+func (c *serviceClient) Search(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrSearchResponse, error) {
 	out := new(EmrSearchResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/Search", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/grpc.Service/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrServiceListResponse, error) {
-	out := new(EmrServiceListResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetService", in, out, opts...)
+func (c *serviceClient) GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrGetServiceResponse, error) {
+	out := new(EmrGetServiceResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetService", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetOpdScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDScreenResponse, error) {
-	out := new(EmrOPDScreenResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetOpdScreening", in, out, opts...)
+func (c *serviceClient) GetOpdScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdScreenResponse, error) {
+	out := new(EmrGetOpdScreenResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetOpdScreening", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetOpdDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDiagResponse, error) {
-	out := new(EmrOPDDiagResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetOpdDiagnosis", in, out, opts...)
+func (c *serviceClient) GetOpdDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdDiagResponse, error) {
+	out := new(EmrGetOpdDiagResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetOpdDiagnosis", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetOpdProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDProcedureResponse, error) {
-	out := new(EmrOPDProcedureResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetOpdProcedure", in, out, opts...)
+func (c *serviceClient) GetOpdProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdProcedureResponse, error) {
+	out := new(EmrGetOpdProcedureResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetOpdProcedure", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetOpdDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDDrugResponse, error) {
-	out := new(EmrOPDDrugResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetOpdDrug", in, out, opts...)
+func (c *serviceClient) GetOpdDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdDrugResponse, error) {
+	out := new(EmrGetOpdDrugResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetOpdDrug", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrOPDLabResponse, error) {
-	out := new(EmrOPDLabResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetOpdLab", in, out, opts...)
+func (c *serviceClient) GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdLabResponse, error) {
+	out := new(EmrGetOpdLabResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetOpdLab", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrAppointmentResponse, error) {
-	out := new(EmrAppointmentResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetAppointment", in, out, opts...)
+func (c *serviceClient) GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAppointmentResponse, error) {
+	out := new(EmrGetAppointmentResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetAppointment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *emrServiceClient) GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrReferOutResponse, error) {
-	out := new(EmrReferOutResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetReferOut", in, out, opts...)
+func (c *serviceClient) GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetReferOutResponse, error) {
+	out := new(EmrGetReferOutResponse)
+	err := c.cc.Invoke(ctx, "/grpc.Service/GetReferOut", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// EmrServiceServer is the server API for EmrService service.
-// All implementations must embed UnimplementedEmrServiceServer
+// ServiceServer is the server API for Service service.
+// All implementations must embed UnimplementedServiceServer
 // for forward compatibility
-type EmrServiceServer interface {
+type ServiceServer interface {
 	Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error)
-	GetService(context.Context, *EmrRequest) (*EmrServiceListResponse, error)
-	GetOpdScreening(context.Context, *EmrServiceRequest) (*EmrOPDScreenResponse, error)
-	GetOpdDiagnosis(context.Context, *EmrServiceRequest) (*EmrOPDDiagResponse, error)
-	GetOpdProcedure(context.Context, *EmrServiceRequest) (*EmrOPDProcedureResponse, error)
-	GetOpdDrug(context.Context, *EmrServiceRequest) (*EmrOPDDrugResponse, error)
-	GetOpdLab(context.Context, *EmrServiceRequest) (*EmrOPDLabResponse, error)
-	GetAppointment(context.Context, *EmrSearchRequest) (*EmrAppointmentResponse, error)
-	GetReferOut(context.Context, *EmrSearchRequest) (*EmrReferOutResponse, error)
-	mustEmbedUnimplementedEmrServiceServer()
+	GetService(context.Context, *EmrRequest) (*EmrGetServiceResponse, error)
+	GetOpdScreening(context.Context, *EmrServiceRequest) (*EmrGetOpdScreenResponse, error)
+	GetOpdDiagnosis(context.Context, *EmrServiceRequest) (*EmrGetOpdDiagResponse, error)
+	GetOpdProcedure(context.Context, *EmrServiceRequest) (*EmrGetOpdProcedureResponse, error)
+	GetOpdDrug(context.Context, *EmrServiceRequest) (*EmrGetOpdDrugResponse, error)
+	GetOpdLab(context.Context, *EmrServiceRequest) (*EmrGetOpdLabResponse, error)
+	GetAppointment(context.Context, *EmrSearchRequest) (*EmrGetAppointmentResponse, error)
+	GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error)
+	mustEmbedUnimplementedServiceServer()
 }
 
-// UnimplementedEmrServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedEmrServiceServer struct {
+// UnimplementedServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedServiceServer struct {
 }
 
-func (UnimplementedEmrServiceServer) Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error) {
+func (UnimplementedServiceServer) Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (UnimplementedEmrServiceServer) GetService(context.Context, *EmrRequest) (*EmrServiceListResponse, error) {
+func (UnimplementedServiceServer) GetService(context.Context, *EmrRequest) (*EmrGetServiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetService not implemented")
 }
-func (UnimplementedEmrServiceServer) GetOpdScreening(context.Context, *EmrServiceRequest) (*EmrOPDScreenResponse, error) {
+func (UnimplementedServiceServer) GetOpdScreening(context.Context, *EmrServiceRequest) (*EmrGetOpdScreenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpdScreening not implemented")
 }
-func (UnimplementedEmrServiceServer) GetOpdDiagnosis(context.Context, *EmrServiceRequest) (*EmrOPDDiagResponse, error) {
+func (UnimplementedServiceServer) GetOpdDiagnosis(context.Context, *EmrServiceRequest) (*EmrGetOpdDiagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpdDiagnosis not implemented")
 }
-func (UnimplementedEmrServiceServer) GetOpdProcedure(context.Context, *EmrServiceRequest) (*EmrOPDProcedureResponse, error) {
+func (UnimplementedServiceServer) GetOpdProcedure(context.Context, *EmrServiceRequest) (*EmrGetOpdProcedureResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpdProcedure not implemented")
 }
-func (UnimplementedEmrServiceServer) GetOpdDrug(context.Context, *EmrServiceRequest) (*EmrOPDDrugResponse, error) {
+func (UnimplementedServiceServer) GetOpdDrug(context.Context, *EmrServiceRequest) (*EmrGetOpdDrugResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpdDrug not implemented")
 }
-func (UnimplementedEmrServiceServer) GetOpdLab(context.Context, *EmrServiceRequest) (*EmrOPDLabResponse, error) {
+func (UnimplementedServiceServer) GetOpdLab(context.Context, *EmrServiceRequest) (*EmrGetOpdLabResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpdLab not implemented")
 }
-func (UnimplementedEmrServiceServer) GetAppointment(context.Context, *EmrSearchRequest) (*EmrAppointmentResponse, error) {
+func (UnimplementedServiceServer) GetAppointment(context.Context, *EmrSearchRequest) (*EmrGetAppointmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAppointment not implemented")
 }
-func (UnimplementedEmrServiceServer) GetReferOut(context.Context, *EmrSearchRequest) (*EmrReferOutResponse, error) {
+func (UnimplementedServiceServer) GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferOut not implemented")
 }
-func (UnimplementedEmrServiceServer) mustEmbedUnimplementedEmrServiceServer() {}
+func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
-// UnsafeEmrServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to EmrServiceServer will
+// UnsafeServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ServiceServer will
 // result in compilation errors.
-type UnsafeEmrServiceServer interface {
-	mustEmbedUnimplementedEmrServiceServer()
+type UnsafeServiceServer interface {
+	mustEmbedUnimplementedServiceServer()
 }
 
-func RegisterEmrServiceServer(s grpc.ServiceRegistrar, srv EmrServiceServer) {
-	s.RegisterService(&EmrService_ServiceDesc, srv)
+func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
+	s.RegisterService(&Service_ServiceDesc, srv)
 }
 
-func _EmrService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrSearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).Search(ctx, in)
+		return srv.(ServiceServer).Search(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/Search",
+		FullMethod: "/grpc.Service/Search",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).Search(ctx, req.(*EmrSearchRequest))
+		return srv.(ServiceServer).Search(ctx, req.(*EmrSearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetService(ctx, in)
+		return srv.(ServiceServer).GetService(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetService",
+		FullMethod: "/grpc.Service/GetService",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetService(ctx, req.(*EmrRequest))
+		return srv.(ServiceServer).GetService(ctx, req.(*EmrRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetOpdScreening_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetOpdScreening_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetOpdScreening(ctx, in)
+		return srv.(ServiceServer).GetOpdScreening(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetOpdScreening",
+		FullMethod: "/grpc.Service/GetOpdScreening",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetOpdScreening(ctx, req.(*EmrServiceRequest))
+		return srv.(ServiceServer).GetOpdScreening(ctx, req.(*EmrServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetOpdDiagnosis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetOpdDiagnosis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetOpdDiagnosis(ctx, in)
+		return srv.(ServiceServer).GetOpdDiagnosis(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetOpdDiagnosis",
+		FullMethod: "/grpc.Service/GetOpdDiagnosis",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetOpdDiagnosis(ctx, req.(*EmrServiceRequest))
+		return srv.(ServiceServer).GetOpdDiagnosis(ctx, req.(*EmrServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetOpdProcedure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetOpdProcedure_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetOpdProcedure(ctx, in)
+		return srv.(ServiceServer).GetOpdProcedure(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetOpdProcedure",
+		FullMethod: "/grpc.Service/GetOpdProcedure",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetOpdProcedure(ctx, req.(*EmrServiceRequest))
+		return srv.(ServiceServer).GetOpdProcedure(ctx, req.(*EmrServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetOpdDrug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetOpdDrug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetOpdDrug(ctx, in)
+		return srv.(ServiceServer).GetOpdDrug(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetOpdDrug",
+		FullMethod: "/grpc.Service/GetOpdDrug",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetOpdDrug(ctx, req.(*EmrServiceRequest))
+		return srv.(ServiceServer).GetOpdDrug(ctx, req.(*EmrServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetOpdLab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetOpdLab_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetOpdLab(ctx, in)
+		return srv.(ServiceServer).GetOpdLab(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetOpdLab",
+		FullMethod: "/grpc.Service/GetOpdLab",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetOpdLab(ctx, req.(*EmrServiceRequest))
+		return srv.(ServiceServer).GetOpdLab(ctx, req.(*EmrServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetAppointment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetAppointment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrSearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetAppointment(ctx, in)
+		return srv.(ServiceServer).GetAppointment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetAppointment",
+		FullMethod: "/grpc.Service/GetAppointment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetAppointment(ctx, req.(*EmrSearchRequest))
+		return srv.(ServiceServer).GetAppointment(ctx, req.(*EmrSearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetReferOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Service_GetReferOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrSearchRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmrServiceServer).GetReferOut(ctx, in)
+		return srv.(ServiceServer).GetReferOut(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetReferOut",
+		FullMethod: "/grpc.Service/GetReferOut",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetReferOut(ctx, req.(*EmrSearchRequest))
+		return srv.(ServiceServer).GetReferOut(ctx, req.(*EmrSearchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// EmrService_ServiceDesc is the grpc.ServiceDesc for EmrService service.
+// Service_ServiceDesc is the grpc.ServiceDesc for Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var EmrService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "grpc.EmrService",
-	HandlerType: (*EmrServiceServer)(nil),
+var Service_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "grpc.Service",
+	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Search",
-			Handler:    _EmrService_Search_Handler,
+			Handler:    _Service_Search_Handler,
 		},
 		{
 			MethodName: "GetService",
-			Handler:    _EmrService_GetService_Handler,
+			Handler:    _Service_GetService_Handler,
 		},
 		{
 			MethodName: "GetOpdScreening",
-			Handler:    _EmrService_GetOpdScreening_Handler,
+			Handler:    _Service_GetOpdScreening_Handler,
 		},
 		{
 			MethodName: "GetOpdDiagnosis",
-			Handler:    _EmrService_GetOpdDiagnosis_Handler,
+			Handler:    _Service_GetOpdDiagnosis_Handler,
 		},
 		{
 			MethodName: "GetOpdProcedure",
-			Handler:    _EmrService_GetOpdProcedure_Handler,
+			Handler:    _Service_GetOpdProcedure_Handler,
 		},
 		{
 			MethodName: "GetOpdDrug",
-			Handler:    _EmrService_GetOpdDrug_Handler,
+			Handler:    _Service_GetOpdDrug_Handler,
 		},
 		{
 			MethodName: "GetOpdLab",
-			Handler:    _EmrService_GetOpdLab_Handler,
+			Handler:    _Service_GetOpdLab_Handler,
 		},
 		{
 			MethodName: "GetAppointment",
-			Handler:    _EmrService_GetAppointment_Handler,
+			Handler:    _Service_GetAppointment_Handler,
 		},
 		{
 			MethodName: "GetReferOut",
-			Handler:    _EmrService_GetReferOut_Handler,
+			Handler:    _Service_GetReferOut_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

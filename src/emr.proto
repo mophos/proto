@@ -2,25 +2,25 @@ syntax = "proto3";
 package grpc;
 option go_package = "./emr;grpc";
 
-service EmrService {
+service Service {
   rpc Search(EmrSearchRequest) returns (EmrSearchResponse) {}
-  rpc GetService(EmrRequest) returns (EmrServiceListResponse) {}
-  rpc GetOpdScreening(EmrServiceRequest) returns (EmrOPDScreenResponse) {}
-  rpc GetOpdDiagnosis(EmrServiceRequest) returns (EmrOPDDiagResponse) {}
-  rpc GetOpdProcedure(EmrServiceRequest) returns (EmrOPDProcedureResponse) {}
-  rpc GetOpdDrug(EmrServiceRequest) returns (EmrOPDDrugResponse) {}
-  rpc GetOpdLab(EmrServiceRequest) returns (EmrOPDLabResponse) {}
-  rpc GetAppointment(EmrSearchRequest) returns (EmrAppointmentResponse) {}
-  rpc GetReferOut(EmrSearchRequest) returns (EmrReferOutResponse) {}
-}
- 
-message EmrSearchRequest {
-  string cid = 1;
+  rpc GetService(EmrRequest) returns (EmrGetServiceResponse) {}
+  rpc GetOpdScreening(EmrServiceRequest) returns (EmrGetOpdScreenResponse) {}
+  rpc GetOpdDiagnosis(EmrServiceRequest) returns (EmrGetOpdDiagResponse) {}
+  rpc GetOpdProcedure(EmrServiceRequest) returns (EmrGetOpdProcedureResponse) {}
+  rpc GetOpdDrug(EmrServiceRequest) returns (EmrGetOpdDrugResponse) {}
+  rpc GetOpdLab(EmrServiceRequest) returns (EmrGetOpdLabResponse) {}
+  rpc GetAppointment(EmrSearchRequest) returns (EmrGetAppointmentResponse) {}
+  rpc GetReferOut(EmrSearchRequest) returns (EmrGetReferOutResponse) {}
 }
 
 message EmrRequest {
   string hn = 1;
   string hospcode = 2;
+}
+
+message EmrSearchRequest {
+  string cid = 1;
 }
 
 message EmrServiceRequest {
@@ -50,7 +50,8 @@ message EmrSearchResponse {
   repeated Results results = 2;
 
 }
-message EmrOPDDrugResponse {
+
+message EmrGetOpdDrugResponse {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -70,7 +71,8 @@ message EmrOPDDrugResponse {
   repeated Results results = 2;
 
 }
-message EmrOPDLabResponse {
+
+message EmrGetOpdLabResponse {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -89,7 +91,7 @@ message EmrOPDLabResponse {
   repeated Results results = 2;
 }
 
-message EmrOPDDiagResponse {
+message EmrGetOpdDiagResponse {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -108,7 +110,7 @@ message EmrOPDDiagResponse {
   repeated Results results = 2;
 }
 
-message EmrOPDProcedureResponse {
+message EmrGetOpdProcedureResponse {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -129,7 +131,7 @@ message EmrOPDProcedureResponse {
   repeated Results results = 2;
 }
 
-message EmrOPDScreenResponse {
+message EmrGetOpdScreenResponse {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -157,7 +159,7 @@ message EmrOPDScreenResponse {
 
 }
 
-message EmrServiceListResponse {
+message EmrGetServiceResponse {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -182,7 +184,7 @@ message EmrServiceListResponse {
 
 }
 
-message EmrAppointmentResponse {
+message EmrGetAppointmentResponse {
   message Results {
     string hospname = 1;
     string hospcode = 2;
@@ -201,7 +203,7 @@ message EmrAppointmentResponse {
   repeated Results results = 2;
 }
 
-message EmrReferOutResponse {
+message EmrGetReferOutResponse {
   message Results {
     string hospname = 1;
     string hospcode = 2;
