@@ -27,6 +27,7 @@ type EmrServiceClient interface {
 	GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdLabResponse, error)
 	GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAppointmentResponse, error)
 	GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetReferOutResponse, error)
+	GetInfo(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrInfoResponse, error)
 }
 
 type emrServiceClient struct {
@@ -118,6 +119,15 @@ func (c *emrServiceClient) GetReferOut(ctx context.Context, in *EmrSearchRequest
 	return out, nil
 }
 
+func (c *emrServiceClient) GetInfo(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrInfoResponse, error) {
+	out := new(EmrInfoResponse)
+	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EmrServiceServer is the server API for EmrService service.
 // All implementations must embed UnimplementedEmrServiceServer
 // for forward compatibility
@@ -131,6 +141,7 @@ type EmrServiceServer interface {
 	GetOpdLab(context.Context, *EmrServiceRequest) (*EmrGetOpdLabResponse, error)
 	GetAppointment(context.Context, *EmrSearchRequest) (*EmrGetAppointmentResponse, error)
 	GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error)
+	GetInfo(context.Context, *EmrRequest) (*EmrInfoResponse, error)
 	mustEmbedUnimplementedEmrServiceServer()
 }
 
@@ -164,6 +175,9 @@ func (UnimplementedEmrServiceServer) GetAppointment(context.Context, *EmrSearchR
 }
 func (UnimplementedEmrServiceServer) GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferOut not implemented")
+}
+func (UnimplementedEmrServiceServer) GetInfo(context.Context, *EmrRequest) (*EmrInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }
 func (UnimplementedEmrServiceServer) mustEmbedUnimplementedEmrServiceServer() {}
 
@@ -340,6 +354,24 @@ func _EmrService_GetReferOut_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EmrService_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmrServiceServer).GetInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.EmrService/GetInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmrServiceServer).GetInfo(ctx, req.(*EmrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EmrService_ServiceDesc is the grpc.ServiceDesc for EmrService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -382,6 +414,10 @@ var EmrService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReferOut",
 			Handler:    _EmrService_GetReferOut_Handler,
+		},
+		{
+			MethodName: "GetInfo",
+			Handler:    _EmrService_GetInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
