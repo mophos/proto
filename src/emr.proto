@@ -119,14 +119,14 @@ message EmrGetOpdProcedureResponse {
     string vn = 4;
     string diagnosis_code = 5;
     string diagnosis_th_name = 6;
-    string diagnosis_en_name = 14;
-    string start_date = 7;
-    string start_time = 8;
-    string finish_date = 9;
-    string finish_time = 10;
-    string provider_name = 11;
-    string his_provider = 12;
-    string txid = 13;
+    string diagnosis_en_name = 7;
+    string start_date = 8;
+    string start_time = 9;
+    string finish_date = 10;
+    string finish_time = 11;
+    string provider_name = 12;
+    string his_provider = 13;
+    string txid = 14;
   }
 
   repeated Results results = 2;
