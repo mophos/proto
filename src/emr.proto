@@ -61,7 +61,7 @@ message EmrGetOpdDrugResponse {
     string vn = 4;
     string drug_code = 5;
     string drug_name = 6;
-    string qty = 7;
+    int32 qty = 7;
     string usage = 8;
     string drugshort_name = 9;
     string provider_name = 10;
