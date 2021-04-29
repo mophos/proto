@@ -1,3 +1,5 @@
+// Copyright 2021 ICT@MOPH.
+
 module github.com/mophos/proto
 
 go 1.16

@@ -1,3 +1,5 @@
+// Copyright 2021 ICT@MOPH.
+
 syntax = "proto3";
 package grpc;
 option go_package = "./emr;grpc";
