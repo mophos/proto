@@ -174,10 +174,11 @@ message EmrGetServiceResponse {
     string an = 11;
     string diagnosis_code = 12;
     string diagnosis_name = 13;
-    string visit_refer = 14;
-    string provider_name = 15;
-    string his_provider = 16;
-    string txid = 17;
+    string diagnosis_text = 14;
+    string visit_refer = 15;
+    string provider_name = 16;
+    string his_provider = 17;
+    string txid = 18;
   }
 
   repeated Results results = 2;
