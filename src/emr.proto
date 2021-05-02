@@ -15,6 +15,7 @@ service EmrService {
   rpc GetAppointment(EmrSearchRequest) returns (EmrGetAppointmentResponse) {}
   rpc GetReferOut(EmrSearchRequest) returns (EmrGetReferOutResponse) {}
   rpc GetInfo(EmrRequest) returns (EmrInfoResponse) {}
+  rpc GetLastService(EmrGetLastServiceRequest) returns (EmrGetLastServiceResponse) {}
 }
 
 message EmrRequest {
@@ -23,6 +24,10 @@ message EmrRequest {
 }
 
 message EmrSearchRequest {
+  string cid = 1;
+}
+
+message EmrGetLastServiceRequest {
   string cid = 1;
 }
 
@@ -229,6 +234,28 @@ message EmrGetReferOutResponse {
     string provider_name = 21;
     string his_provider = 22;
     string txid = 23;
+    
+  }
+  repeated Results results = 2;
+}
+
+message EmrGetLastServiceResponse {
+  message Results {
+    string hospname = 1;
+    string hospcode = 2;
+    string hn = 3;
+    string vn = 4;
+    string an = 5;
+    string visit_date = 6;
+    string visit_time = 7;
+    string pttype = 8;
+    string pttype_no = 9;
+    string pttype_name = 10;
+    string diagcode = 11;
+    string diagname = 12;
+    string provider_name = 13;
+    string his_provider = 14;
+    string txid = 15;
     
   }
   repeated Results results = 2;
