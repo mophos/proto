@@ -28,7 +28,6 @@ type EmrServiceClient interface {
 	GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAppointmentResponse, error)
 	GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetReferOutResponse, error)
 	GetInfo(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrInfoResponse, error)
-	GetLastService(ctx context.Context, in *EmrGetLastServiceRequest, opts ...grpc.CallOption) (*EmrGetLastServiceResponse, error)
 }
 
 type emrServiceClient struct {
@@ -129,15 +128,6 @@ func (c *emrServiceClient) GetInfo(ctx context.Context, in *EmrRequest, opts ...
 	return out, nil
 }
 
-func (c *emrServiceClient) GetLastService(ctx context.Context, in *EmrGetLastServiceRequest, opts ...grpc.CallOption) (*EmrGetLastServiceResponse, error) {
-	out := new(EmrGetLastServiceResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetLastService", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // EmrServiceServer is the server API for EmrService service.
 // All implementations must embed UnimplementedEmrServiceServer
 // for forward compatibility
@@ -152,7 +142,6 @@ type EmrServiceServer interface {
 	GetAppointment(context.Context, *EmrSearchRequest) (*EmrGetAppointmentResponse, error)
 	GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error)
 	GetInfo(context.Context, *EmrRequest) (*EmrInfoResponse, error)
-	GetLastService(context.Context, *EmrGetLastServiceRequest) (*EmrGetLastServiceResponse, error)
 	mustEmbedUnimplementedEmrServiceServer()
 }
 
@@ -189,9 +178,6 @@ func (UnimplementedEmrServiceServer) GetReferOut(context.Context, *EmrSearchRequ
 }
 func (UnimplementedEmrServiceServer) GetInfo(context.Context, *EmrRequest) (*EmrInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
-}
-func (UnimplementedEmrServiceServer) GetLastService(context.Context, *EmrGetLastServiceRequest) (*EmrGetLastServiceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetLastService not implemented")
 }
 func (UnimplementedEmrServiceServer) mustEmbedUnimplementedEmrServiceServer() {}
 
@@ -386,24 +372,6 @@ func _EmrService_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _EmrService_GetLastService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmrGetLastServiceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(EmrServiceServer).GetLastService(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/grpc.EmrService/GetLastService",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetLastService(ctx, req.(*EmrGetLastServiceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // EmrService_ServiceDesc is the grpc.ServiceDesc for EmrService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -450,10 +418,6 @@ var EmrService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInfo",
 			Handler:    _EmrService_GetInfo_Handler,
-		},
-		{
-			MethodName: "GetLastService",
-			Handler:    _EmrService_GetLastService_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

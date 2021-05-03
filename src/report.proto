@@ -1,0 +1,35 @@
+// Copyright 2021 ICT@MOPH.
+
+syntax = "proto3";
+package grpc;
+option go_package = "./report;grpc";
+
+service ReportService {
+  rpc GetLastService(ReportGetLastServiceRequest) returns (ReportGetLastServiceResponse) {}
+}
+
+message ReportGetLastServiceRequest {
+  string cid = 1;
+}
+
+message ReportGetLastServiceResponse {
+  message Results {
+    string hospname = 1;
+    string hospcode = 2;
+    string hn = 3;
+    string vn = 4;
+    string an = 5;
+    string visit_date = 6;
+    string visit_time = 7;
+    string pttype = 8;
+    string pttype_no = 9;
+    string pttype_name = 10;
+    string diagcode = 11;
+    string diagname = 12;
+    string provider_name = 13;
+    string his_provider = 14;
+    string txid = 15;
+    
+  }
+  repeated Results results = 2;
+}
