@@ -5,7 +5,7 @@ package grpc;
 option go_package = "./report;grpc";
 
 service ReportService {
-  rpc GetLastService(ReportGetLastServiceRequest) returns (ReportGetLastServiceResponse) {}
+  rpc ReportGetLastService(ReportGetLastServiceRequest) returns (ReportGetLastServiceResponse) {}
 }
 
 message ReportGetLastServiceRequest {

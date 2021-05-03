@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReportServiceClient interface {
-	GetLastService(ctx context.Context, in *ReportGetLastServiceRequest, opts ...grpc.CallOption) (*ReportGetLastServiceResponse, error)
+	ReportGetLastService(ctx context.Context, in *ReportGetLastServiceRequest, opts ...grpc.CallOption) (*ReportGetLastServiceResponse, error)
 }
 
 type reportServiceClient struct {
@@ -29,9 +29,9 @@ func NewReportServiceClient(cc grpc.ClientConnInterface) ReportServiceClient {
 	return &reportServiceClient{cc}
 }
 
-func (c *reportServiceClient) GetLastService(ctx context.Context, in *ReportGetLastServiceRequest, opts ...grpc.CallOption) (*ReportGetLastServiceResponse, error) {
+func (c *reportServiceClient) ReportGetLastService(ctx context.Context, in *ReportGetLastServiceRequest, opts ...grpc.CallOption) (*ReportGetLastServiceResponse, error) {
 	out := new(ReportGetLastServiceResponse)
-	err := c.cc.Invoke(ctx, "/grpc.ReportService/GetLastService", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/grpc.ReportService/ReportGetLastService", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *reportServiceClient) GetLastService(ctx context.Context, in *ReportGetL
 // All implementations must embed UnimplementedReportServiceServer
 // for forward compatibility
 type ReportServiceServer interface {
-	GetLastService(context.Context, *ReportGetLastServiceRequest) (*ReportGetLastServiceResponse, error)
+	ReportGetLastService(context.Context, *ReportGetLastServiceRequest) (*ReportGetLastServiceResponse, error)
 	mustEmbedUnimplementedReportServiceServer()
 }
 
@@ -50,8 +50,8 @@ type ReportServiceServer interface {
 type UnimplementedReportServiceServer struct {
 }
 
-func (UnimplementedReportServiceServer) GetLastService(context.Context, *ReportGetLastServiceRequest) (*ReportGetLastServiceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetLastService not implemented")
+func (UnimplementedReportServiceServer) ReportGetLastService(context.Context, *ReportGetLastServiceRequest) (*ReportGetLastServiceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportGetLastService not implemented")
 }
 func (UnimplementedReportServiceServer) mustEmbedUnimplementedReportServiceServer() {}
 
@@ -66,20 +66,20 @@ func RegisterReportServiceServer(s grpc.ServiceRegistrar, srv ReportServiceServe
 	s.RegisterService(&ReportService_ServiceDesc, srv)
 }
 
-func _ReportService_GetLastService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ReportService_ReportGetLastService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReportGetLastServiceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ReportServiceServer).GetLastService(ctx, in)
+		return srv.(ReportServiceServer).ReportGetLastService(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.ReportService/GetLastService",
+		FullMethod: "/grpc.ReportService/ReportGetLastService",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetLastService(ctx, req.(*ReportGetLastServiceRequest))
+		return srv.(ReportServiceServer).ReportGetLastService(ctx, req.(*ReportGetLastServiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -92,8 +92,8 @@ var ReportService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ReportServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetLastService",
-			Handler:    _ReportService_GetLastService_Handler,
+			MethodName: "ReportGetLastService",
+			Handler:    _ReportService_ReportGetLastService_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
