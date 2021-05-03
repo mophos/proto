@@ -19,16 +19,17 @@ message ReportGetLastServiceResponse {
     string hn = 3;
     string vn = 4;
     string an = 5;
-    string visit_date = 6;
-    string visit_time = 7;
-    string pttype = 8;
-    string pttype_no = 9;
-    string pttype_name = 10;
-    string diagcode = 11;
-    string diagname = 12;
-    string provider_name = 13;
-    string his_provider = 14;
-    string txid = 15;
+    string cid = 6;
+    string visit_date = 7;
+    string visit_time = 8;
+    string pttype = 9;
+    string pttype_no = 10;
+    string pttype_name = 11;
+    string diagcode = 12;
+    string diagname = 13;
+    string provider_name = 14;
+    string his_provider = 15;
+    string txid = 16;
     
   }
   repeated Results results = 2;

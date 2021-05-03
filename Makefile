@@ -1,4 +1,4 @@
-VERSION=1.3.19
+VERSION=1.3.20
 publish:
 	rm -rf grpc/*
 	protoc --go_out=./grpc --go-grpc_out=./grpc ./src/*.proto
