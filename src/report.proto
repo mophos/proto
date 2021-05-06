@@ -24,8 +24,8 @@ message ReportGetLastServiceResponse {
     string pttype = 8;
     string pttype_no = 9;
     string pttype_name = 10;
-    string diagcode = 11;
-    string diagname = 12;
+    string diagnosis_code = 11;
+    string diagnosis_name = 12;
     string provider_name = 13;
     string his_provider = 14;
     string txid = 15;
