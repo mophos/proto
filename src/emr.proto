@@ -13,6 +13,8 @@ service EmrService {
   rpc GetOpdDrug(EmrServiceRequest) returns (EmrGetOpdDrugResponse) {}
   rpc GetOpdLab(EmrServiceRequest) returns (EmrGetOpdLabResponse) {}
   rpc GetAppointment(EmrSearchRequest) returns (EmrGetAppointmentResponse) {}
+  rpc GetVaccine(EmrSearchRequest) returns (EmrGetVaccineResponse) {}
+  rpc GetAnc(EmrSearchRequest) returns (EmrGetAncResponse) {}
   rpc GetReferOut(EmrSearchRequest) returns (EmrGetReferOutResponse) {}
   rpc GetInfo(EmrRequest) returns (EmrInfoResponse) {}
 }
@@ -201,6 +203,45 @@ message EmrGetAppointmentResponse {
     string his_provider = 12;
     string txid = 13;
   }
+  repeated Results results = 2;
+}
+
+message EmrGetAncResponse {
+  message Results {
+    string hospcode = 1;
+    string hospname = 2;
+    string cid = 3;
+    string ga = 4;
+    string anc_no = 5;
+    string result = 6;
+    string anc_service_note = 7;
+    string provider_name = 8;
+    string risk_list = 9;
+		string ultrasound_text = 10;
+		string anc_register_staff = 11;
+		string anc_register_date = 12;
+    string his_provider = 13;
+    string txid = 14;
+  }
+  
+  repeated Results results = 2;
+}
+
+message EmrGetVaccineResponse {
+  message Results {
+    string hospcode = 1;
+    string hospname = 2;
+    string hn = 3;
+    string vn = 4;
+    string visit_date = 5;
+    string visit_time = 6;
+    string vaccine_code = 7;
+    string vaccine_name = 8;
+    string provider_name = 9;
+    string his_provider = 10;
+    string txid = 11;
+  }
+
   repeated Results results = 2;
 }
 

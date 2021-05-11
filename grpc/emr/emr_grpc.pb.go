@@ -26,6 +26,8 @@ type EmrServiceClient interface {
 	GetOpdDrug(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdDrugResponse, error)
 	GetOpdLab(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdLabResponse, error)
 	GetAppointment(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAppointmentResponse, error)
+	GetVaccine(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetVaccineResponse, error)
+	GetAnc(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAncResponse, error)
 	GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetReferOutResponse, error)
 	GetInfo(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrInfoResponse, error)
 }
@@ -110,6 +112,24 @@ func (c *emrServiceClient) GetAppointment(ctx context.Context, in *EmrSearchRequ
 	return out, nil
 }
 
+func (c *emrServiceClient) GetVaccine(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetVaccineResponse, error) {
+	out := new(EmrGetVaccineResponse)
+	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetVaccine", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emrServiceClient) GetAnc(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetAncResponse, error) {
+	out := new(EmrGetAncResponse)
+	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetAnc", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *emrServiceClient) GetReferOut(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrGetReferOutResponse, error) {
 	out := new(EmrGetReferOutResponse)
 	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetReferOut", in, out, opts...)
@@ -140,6 +160,8 @@ type EmrServiceServer interface {
 	GetOpdDrug(context.Context, *EmrServiceRequest) (*EmrGetOpdDrugResponse, error)
 	GetOpdLab(context.Context, *EmrServiceRequest) (*EmrGetOpdLabResponse, error)
 	GetAppointment(context.Context, *EmrSearchRequest) (*EmrGetAppointmentResponse, error)
+	GetVaccine(context.Context, *EmrSearchRequest) (*EmrGetVaccineResponse, error)
+	GetAnc(context.Context, *EmrSearchRequest) (*EmrGetAncResponse, error)
 	GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error)
 	GetInfo(context.Context, *EmrRequest) (*EmrInfoResponse, error)
 	mustEmbedUnimplementedEmrServiceServer()
@@ -172,6 +194,12 @@ func (UnimplementedEmrServiceServer) GetOpdLab(context.Context, *EmrServiceReque
 }
 func (UnimplementedEmrServiceServer) GetAppointment(context.Context, *EmrSearchRequest) (*EmrGetAppointmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAppointment not implemented")
+}
+func (UnimplementedEmrServiceServer) GetVaccine(context.Context, *EmrSearchRequest) (*EmrGetVaccineResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetVaccine not implemented")
+}
+func (UnimplementedEmrServiceServer) GetAnc(context.Context, *EmrSearchRequest) (*EmrGetAncResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnc not implemented")
 }
 func (UnimplementedEmrServiceServer) GetReferOut(context.Context, *EmrSearchRequest) (*EmrGetReferOutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReferOut not implemented")
@@ -336,6 +364,42 @@ func _EmrService_GetAppointment_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EmrService_GetVaccine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmrSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmrServiceServer).GetVaccine(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.EmrService/GetVaccine",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmrServiceServer).GetVaccine(ctx, req.(*EmrSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EmrService_GetAnc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmrSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmrServiceServer).GetAnc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.EmrService/GetAnc",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmrServiceServer).GetAnc(ctx, req.(*EmrSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EmrService_GetReferOut_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmrSearchRequest)
 	if err := dec(in); err != nil {
@@ -410,6 +474,14 @@ var EmrService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAppointment",
 			Handler:    _EmrService_GetAppointment_Handler,
+		},
+		{
+			MethodName: "GetVaccine",
+			Handler:    _EmrService_GetVaccine_Handler,
+		},
+		{
+			MethodName: "GetAnc",
+			Handler:    _EmrService_GetAnc_Handler,
 		},
 		{
 			MethodName: "GetReferOut",
