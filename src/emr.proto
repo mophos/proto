@@ -22,6 +22,7 @@ service EmrService {
 message EmrRequest {
   string hn = 1;
   string hospcode = 2;
+  string resultType = 3 ;
 }
 
 message EmrSearchRequest {
