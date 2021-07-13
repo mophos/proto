@@ -19,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmrServiceClient interface {
 	Search(ctx context.Context, in *EmrSearchRequest, opts ...grpc.CallOption) (*EmrSearchResponse, error)
-	GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrGetServiceResponse, error)
+	GetService(ctx context.Context, in *EmrDiagnosisRequest, opts ...grpc.CallOption) (*EmrGetServiceResponse, error)
 	GetOpdScreening(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdScreenResponse, error)
 	GetOpdDiagnosis(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdDiagResponse, error)
 	GetOpdProcedure(ctx context.Context, in *EmrServiceRequest, opts ...grpc.CallOption) (*EmrGetOpdProcedureResponse, error)
@@ -49,7 +49,7 @@ func (c *emrServiceClient) Search(ctx context.Context, in *EmrSearchRequest, opt
 	return out, nil
 }
 
-func (c *emrServiceClient) GetService(ctx context.Context, in *EmrRequest, opts ...grpc.CallOption) (*EmrGetServiceResponse, error) {
+func (c *emrServiceClient) GetService(ctx context.Context, in *EmrDiagnosisRequest, opts ...grpc.CallOption) (*EmrGetServiceResponse, error) {
 	out := new(EmrGetServiceResponse)
 	err := c.cc.Invoke(ctx, "/grpc.EmrService/GetService", in, out, opts...)
 	if err != nil {
@@ -153,7 +153,7 @@ func (c *emrServiceClient) GetInfo(ctx context.Context, in *EmrRequest, opts ...
 // for forward compatibility
 type EmrServiceServer interface {
 	Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error)
-	GetService(context.Context, *EmrRequest) (*EmrGetServiceResponse, error)
+	GetService(context.Context, *EmrDiagnosisRequest) (*EmrGetServiceResponse, error)
 	GetOpdScreening(context.Context, *EmrServiceRequest) (*EmrGetOpdScreenResponse, error)
 	GetOpdDiagnosis(context.Context, *EmrServiceRequest) (*EmrGetOpdDiagResponse, error)
 	GetOpdProcedure(context.Context, *EmrServiceRequest) (*EmrGetOpdProcedureResponse, error)
@@ -174,7 +174,7 @@ type UnimplementedEmrServiceServer struct {
 func (UnimplementedEmrServiceServer) Search(context.Context, *EmrSearchRequest) (*EmrSearchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (UnimplementedEmrServiceServer) GetService(context.Context, *EmrRequest) (*EmrGetServiceResponse, error) {
+func (UnimplementedEmrServiceServer) GetService(context.Context, *EmrDiagnosisRequest) (*EmrGetServiceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetService not implemented")
 }
 func (UnimplementedEmrServiceServer) GetOpdScreening(context.Context, *EmrServiceRequest) (*EmrGetOpdScreenResponse, error) {
@@ -239,7 +239,7 @@ func _EmrService_Search_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _EmrService_GetService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(EmrRequest)
+	in := new(EmrDiagnosisRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -251,7 +251,7 @@ func _EmrService_GetService_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/grpc.EmrService/GetService",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmrServiceServer).GetService(ctx, req.(*EmrRequest))
+		return srv.(EmrServiceServer).GetService(ctx, req.(*EmrDiagnosisRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

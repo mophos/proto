@@ -6,7 +6,7 @@ option go_package = "./emr;grpc";
 
 service EmrService {
   rpc Search(EmrSearchRequest) returns (EmrSearchResponse) {}
-  rpc GetService(EmrRequest) returns (EmrGetServiceResponse) {}
+  rpc GetService(EmrDiagnosisRequest) returns (EmrGetServiceResponse) {}
   rpc GetOpdScreening(EmrServiceRequest) returns (EmrGetOpdScreenResponse) {}
   rpc GetOpdDiagnosis(EmrServiceRequest) returns (EmrGetOpdDiagResponse) {}
   rpc GetOpdProcedure(EmrServiceRequest) returns (EmrGetOpdProcedureResponse) {}
@@ -20,6 +20,11 @@ service EmrService {
 }
 
 message EmrRequest {
+  string hn = 1;
+  string hospcode = 2;
+}
+
+message EmrDiagnosisRequest {
   string hn = 1;
   string hospcode = 2;
   string resultType = 3 ;
