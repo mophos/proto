@@ -1,0 +1,30 @@
+// Copyright 2021 ICT@MOPH.
+
+syntax = "proto3";
+package grpc;
+option go_package = "./ems;grpc";
+
+service EmsService {
+  rpc Search(EmsPatientRequest) returns (EmsPatientResponse) {}
+}
+
+message EmsPatientRequest {
+  string cid = 1;
+}
+
+message EmsPatientResponse {
+  message Results {
+    string hospcode = 1;
+    string hn = 2;
+    string cid = 3;
+    string passport = 4;
+    string title_name = 5;
+    string first_name = 6;
+    string last_name = 7;
+    string gender_id = 8;
+    string birthdate = 9;
+    string gw_record_id = 10;
+  }
+
+  repeated Results results = 2;
+}
