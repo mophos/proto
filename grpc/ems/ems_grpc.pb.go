@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmsServiceClient interface {
-	Search(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsPatientResponse, error)
+	PatientInfo(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsPatientResponse, error)
 }
 
 type emsServiceClient struct {
@@ -29,9 +29,9 @@ func NewEmsServiceClient(cc grpc.ClientConnInterface) EmsServiceClient {
 	return &emsServiceClient{cc}
 }
 
-func (c *emsServiceClient) Search(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsPatientResponse, error) {
+func (c *emsServiceClient) PatientInfo(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsPatientResponse, error) {
 	out := new(EmsPatientResponse)
-	err := c.cc.Invoke(ctx, "/grpc.EmsService/Search", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/grpc.EmsService/PatientInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *emsServiceClient) Search(ctx context.Context, in *EmsPatientRequest, op
 // All implementations must embed UnimplementedEmsServiceServer
 // for forward compatibility
 type EmsServiceServer interface {
-	Search(context.Context, *EmsPatientRequest) (*EmsPatientResponse, error)
+	PatientInfo(context.Context, *EmsPatientRequest) (*EmsPatientResponse, error)
 	mustEmbedUnimplementedEmsServiceServer()
 }
 
@@ -50,8 +50,8 @@ type EmsServiceServer interface {
 type UnimplementedEmsServiceServer struct {
 }
 
-func (UnimplementedEmsServiceServer) Search(context.Context, *EmsPatientRequest) (*EmsPatientResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
+func (UnimplementedEmsServiceServer) PatientInfo(context.Context, *EmsPatientRequest) (*EmsPatientResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatientInfo not implemented")
 }
 func (UnimplementedEmsServiceServer) mustEmbedUnimplementedEmsServiceServer() {}
 
@@ -66,20 +66,20 @@ func RegisterEmsServiceServer(s grpc.ServiceRegistrar, srv EmsServiceServer) {
 	s.RegisterService(&EmsService_ServiceDesc, srv)
 }
 
-func _EmsService_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _EmsService_PatientInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(EmsPatientRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EmsServiceServer).Search(ctx, in)
+		return srv.(EmsServiceServer).PatientInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/grpc.EmsService/Search",
+		FullMethod: "/grpc.EmsService/PatientInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EmsServiceServer).Search(ctx, req.(*EmsPatientRequest))
+		return srv.(EmsServiceServer).PatientInfo(ctx, req.(*EmsPatientRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -92,8 +92,8 @@ var EmsService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*EmsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Search",
-			Handler:    _EmsService_Search_Handler,
+			MethodName: "PatientInfo",
+			Handler:    _EmsService_PatientInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

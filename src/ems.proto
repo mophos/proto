@@ -5,7 +5,7 @@ package grpc;
 option go_package = "./ems;grpc";
 
 service EmsService {
-  rpc Search(EmsPatientRequest) returns (EmsPatientResponse) {}
+  rpc PatientInfo(EmsPatientRequest) returns (EmsPatientResponse) {}
 }
 
 message EmsPatientRequest {
