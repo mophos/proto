@@ -19,6 +19,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EmsServiceClient interface {
 	PatientInfo(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsPatientResponse, error)
+	HospitalLatest(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsHospitalLatestResponse, error)
+	VisitCountMax(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsVisitCountMaxResponse, error)
 }
 
 type emsServiceClient struct {
@@ -38,11 +40,31 @@ func (c *emsServiceClient) PatientInfo(ctx context.Context, in *EmsPatientReques
 	return out, nil
 }
 
+func (c *emsServiceClient) HospitalLatest(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsHospitalLatestResponse, error) {
+	out := new(EmsHospitalLatestResponse)
+	err := c.cc.Invoke(ctx, "/grpc.EmsService/HospitalLatest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emsServiceClient) VisitCountMax(ctx context.Context, in *EmsPatientRequest, opts ...grpc.CallOption) (*EmsVisitCountMaxResponse, error) {
+	out := new(EmsVisitCountMaxResponse)
+	err := c.cc.Invoke(ctx, "/grpc.EmsService/VisitCountMax", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EmsServiceServer is the server API for EmsService service.
 // All implementations must embed UnimplementedEmsServiceServer
 // for forward compatibility
 type EmsServiceServer interface {
 	PatientInfo(context.Context, *EmsPatientRequest) (*EmsPatientResponse, error)
+	HospitalLatest(context.Context, *EmsPatientRequest) (*EmsHospitalLatestResponse, error)
+	VisitCountMax(context.Context, *EmsPatientRequest) (*EmsVisitCountMaxResponse, error)
 	mustEmbedUnimplementedEmsServiceServer()
 }
 
@@ -52,6 +74,12 @@ type UnimplementedEmsServiceServer struct {
 
 func (UnimplementedEmsServiceServer) PatientInfo(context.Context, *EmsPatientRequest) (*EmsPatientResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PatientInfo not implemented")
+}
+func (UnimplementedEmsServiceServer) HospitalLatest(context.Context, *EmsPatientRequest) (*EmsHospitalLatestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HospitalLatest not implemented")
+}
+func (UnimplementedEmsServiceServer) VisitCountMax(context.Context, *EmsPatientRequest) (*EmsVisitCountMaxResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VisitCountMax not implemented")
 }
 func (UnimplementedEmsServiceServer) mustEmbedUnimplementedEmsServiceServer() {}
 
@@ -84,6 +112,42 @@ func _EmsService_PatientInfo_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EmsService_HospitalLatest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmsPatientRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmsServiceServer).HospitalLatest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.EmsService/HospitalLatest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmsServiceServer).HospitalLatest(ctx, req.(*EmsPatientRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EmsService_VisitCountMax_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmsPatientRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmsServiceServer).VisitCountMax(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/grpc.EmsService/VisitCountMax",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmsServiceServer).VisitCountMax(ctx, req.(*EmsPatientRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EmsService_ServiceDesc is the grpc.ServiceDesc for EmsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -94,6 +158,14 @@ var EmsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PatientInfo",
 			Handler:    _EmsService_PatientInfo_Handler,
+		},
+		{
+			MethodName: "HospitalLatest",
+			Handler:    _EmsService_HospitalLatest_Handler,
+		},
+		{
+			MethodName: "VisitCountMax",
+			Handler:    _EmsService_VisitCountMax_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

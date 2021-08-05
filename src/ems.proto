@@ -6,6 +6,8 @@ option go_package = "./ems;grpc";
 
 service EmsService {
   rpc PatientInfo(EmsPatientRequest) returns (EmsPatientResponse) {}
+  rpc HospitalLatest(EmsPatientRequest) returns (EmsHospitalLatestResponse) {}
+  rpc VisitCountMax(EmsPatientRequest) returns (EmsVisitCountMaxResponse) {}
 }
 
 message EmsPatientRequest {
@@ -19,6 +21,29 @@ message EmsPatientResponse {
     string hospname = 3;
     string hn = 4;
     string count = 5;
+  }
+  repeated Results results = 2;
+}
+  
+message EmsVisitCountMaxResponse {
+  message Results {
+    string cid = 1;
+    string hospcode = 2;
+    string hospname = 3;
+    string hn = 4;
+  }
+  repeated Results results = 2;
+}
+
+message EmsHospitalLatestResponse {
+  message Results {
+    string cid = 1;
+    string hospcode = 2;
+    string hospname = 3;
+    string hn = 4;
+    string an = 5;
+    string vstdate = 6;
+    string vsttime = 7;
   }
 
   repeated Results results = 2;
